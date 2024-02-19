@@ -1,51 +1,47 @@
 package email
 
 import (
-	"os"
-
-	"github.com/antonybholmes/go-auth"
 	"github.com/antonybholmes/go-env"
+	"github.com/antonybholmes/go-mailer"
 )
 
-var emailer = auth.NewSMTPEmailer()
+var emailer = mailer.NewSMTPEmailer()
 
 func init() {
 	// force loading of enviromental variables if not done so
 	env.Load()
 
+	from := mailer.NewMailbox(env.GetStr("SMTP_NAME", ""), env.GetStr("SMTP_FROM", ""))
+
 	// Attempt to initialize by scanning enviromental variables.
 	// If user has set them, magic, otherwise user will have to manually
 	// specify
-	emailer.SetName(os.Getenv("NAME")).
+	emailer.
 		SetUser(env.GetStr("SMTP_USER", ""), env.GetStr("SMTP_PASSWORD", "")).
 		SetHost(env.GetStr("SMTP_HOST", ""), env.GetUint32("SMTP_PORT", 587)).
-		SetFrom(env.GetStr("SMTP_FROM", ""))
+		SetFrom(from)
 }
 
-func SetName(name string) *auth.SMTPEmailer {
-	return emailer.SetName(name)
-}
-
-func SetUser(user string, password string) *auth.SMTPEmailer {
+func SetUser(user string, password string) *mailer.SMTPEmailer {
 	return emailer.SetUser(user, password)
 }
 
-func SetHost(host string, port uint) *auth.SMTPEmailer {
+func SetHost(host string, port uint) *mailer.SMTPEmailer {
 	return emailer.SetHost(host, port)
 }
 
-func From() string {
+func From() *mailer.Mailbox {
 	return emailer.From()
 }
 
-func SetFrom(from string) *auth.SMTPEmailer {
+func SetFrom(from *mailer.Mailbox) *mailer.SMTPMailer {
 	return emailer.SetFrom(from)
 }
 
-func SendEmail(to string, body []byte) error {
-	return emailer.SendEmail(to, body)
+func SendEmail(to *mailer.Mailbox, subject string, message string) error {
+	return emailer.SendEmail(to, subject, message)
 }
 
-func Compose(to string, subject string, body string) error {
-	return emailer.Compose(to, subject, body)
+func SendHtmlEmail(to *mailer.Mailbox, subject string, message string) error {
+	return emailer.SendHtmlEmail(to, subject, message)
 }

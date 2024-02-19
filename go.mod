@@ -1,4 +1,4 @@
-module github.com/antonybholmes/go-auth
+module github.com/antonybholmes/go-mailer
 
 go 1.22.0
 
