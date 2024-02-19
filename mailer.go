@@ -1,4 +1,4 @@
-package email
+package mailer
 
 import (
 	"bytes"
@@ -113,7 +113,7 @@ func (mailer *SMTPMailer) SendEmail(to *Mailbox, subject string, message string)
 	var body bytes.Buffer
 
 	mailer.plainEmailHeader(to, subject, &body)
-	EmailLine(message, &body)
+	emailLine(message, &body)
 
 	return mailer.SendEmailRaw(to, body.Bytes())
 }
@@ -122,37 +122,27 @@ func (mailer *SMTPMailer) SendHtmlEmail(to *Mailbox, subject string, message str
 	var body bytes.Buffer
 
 	mailer.htmlEmailHeader(to, subject, &body)
-	EmailLine(message, &body)
+	emailLine(message, &body)
+
+	log.Debug().Msgf("%s", body.String())
 
 	return mailer.SendEmailRaw(to, body.Bytes())
 }
 
 func (mailer *SMTPMailer) htmlEmailHeader(to *Mailbox, subject string, body *bytes.Buffer) {
-	EmailLine("MIME-version: 1.0", body)
-	EmailLine("Content-Type: text/plain; charset=\"UTF-8\";", body)
+	emailLine("MIME-version: 1.0", body)
+	emailLine("Content-Type: text/html; charset=\"UTF-8\";", body)
 	mailer.plainEmailHeader(to, subject, body)
 }
 
 func (mailer *SMTPMailer) plainEmailHeader(to *Mailbox, subject string, body *bytes.Buffer) {
-	FromHeader(mailer.from, body)
-	ToHeader(to, body)
-	SubjectHeader(subject, body)
+	emailLine(fmt.Sprintf("From: %s", mailer.from), body)
+	emailLine(fmt.Sprintf("To: %s", to), body)
+	emailLine(fmt.Sprintf("Subject: %s", subject), body)
 	// need empty line between header and body
-	EmailLine("", body)
+	emailLine("", body)
 }
 
-func FromHeader(mailbox *Mailbox, body *bytes.Buffer) {
-	EmailLine(fmt.Sprintf("From: %s", mailbox), body)
-}
-
-func ToHeader(mailbox *Mailbox, body *bytes.Buffer) {
-	EmailLine(fmt.Sprintf("To: %s", mailbox), body)
-}
-
-func SubjectHeader(subject string, body *bytes.Buffer) {
-	EmailLine(fmt.Sprintf("Subject: %s", subject), body)
-}
-
-func EmailLine(s string, body *bytes.Buffer) {
+func emailLine(s string, body *bytes.Buffer) {
 	body.Write([]byte(fmt.Sprintf("%s\r\n", s)))
 }
