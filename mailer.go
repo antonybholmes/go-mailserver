@@ -124,7 +124,7 @@ func (mailer *SMTPMailer) SendHtmlEmail(to *Mailbox, subject string, message str
 	mailer.htmlEmailHeader(to, subject, &body)
 	emailLine(message, &body)
 
-	log.Debug().Msgf("%s", body.String())
+	//log.Debug().Msgf("%s", body.String())
 
 	return mailer.SendEmailRaw(to, body.Bytes())
 }
