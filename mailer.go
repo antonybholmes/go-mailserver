@@ -3,23 +3,11 @@ package mailer
 import (
 	"bytes"
 	"fmt"
+	"net/mail"
 	"net/smtp"
 
 	"github.com/rs/zerolog/log"
 )
-
-type Mailbox struct {
-	name  string
-	email string
-}
-
-func NewMailbox(name string, email string) *Mailbox {
-	return &Mailbox{name, email}
-}
-
-func (mailbox *Mailbox) String() string {
-	return fmt.Sprintf("%s <%s>", mailbox.name, mailbox.email)
-}
 
 type SMTPMailer struct {
 	user     string
@@ -27,7 +15,7 @@ type SMTPMailer struct {
 	host     string
 	port     uint
 	addr     string
-	from     *Mailbox
+	from     *mail.Address
 }
 
 func NewSMTPMailer() *SMTPMailer {
@@ -57,16 +45,16 @@ func (mailer *SMTPMailer) SetHost(host string, port uint) *SMTPMailer {
 	return mailer
 }
 
-func (mailer *SMTPMailer) From() *Mailbox {
+func (mailer *SMTPMailer) From() *mail.Address {
 	return mailer.from
 }
 
-func (mailer *SMTPMailer) SetFrom(from *Mailbox) *SMTPMailer {
+func (mailer *SMTPMailer) SetFrom(from *mail.Address) *SMTPMailer {
 	mailer.from = from
 	return mailer
 }
 
-func (mailer *SMTPMailer) SendEmailRaw(to *Mailbox, body []byte) error {
+func (mailer *SMTPMailer) SendEmailRaw(to *mail.Address, body []byte) error {
 
 	//from := os.Getenv("EMAIL")
 
@@ -95,8 +83,8 @@ func (mailer *SMTPMailer) SendEmailRaw(to *Mailbox, body []byte) error {
 	auth := smtp.PlainAuth("", mailer.user, mailer.password, mailer.host)
 
 	// Sending email.
-	err := smtp.SendMail(mailer.addr, auth, mailer.from.email, []string{
-		to.email,
+	err := smtp.SendMail(mailer.addr, auth, mailer.from.Address, []string{
+		to.Address,
 	}, body)
 
 	if err != nil {
@@ -109,7 +97,7 @@ func (mailer *SMTPMailer) SendEmailRaw(to *Mailbox, body []byte) error {
 	return nil
 }
 
-func (mailer *SMTPMailer) SendEmail(to *Mailbox, subject string, message string) error {
+func (mailer *SMTPMailer) SendEmail(to *mail.Address, subject string, message string) error {
 	var body bytes.Buffer
 
 	mailer.plainEmailHeader(to, subject, &body)
@@ -118,7 +106,7 @@ func (mailer *SMTPMailer) SendEmail(to *Mailbox, subject string, message string)
 	return mailer.SendEmailRaw(to, body.Bytes())
 }
 
-func (mailer *SMTPMailer) SendHtmlEmail(to *Mailbox, subject string, message string) error {
+func (mailer *SMTPMailer) SendHtmlEmail(to *mail.Address, subject string, message string) error {
 	var body bytes.Buffer
 
 	mailer.htmlEmailHeader(to, subject, &body)
@@ -129,13 +117,13 @@ func (mailer *SMTPMailer) SendHtmlEmail(to *Mailbox, subject string, message str
 	return mailer.SendEmailRaw(to, body.Bytes())
 }
 
-func (mailer *SMTPMailer) htmlEmailHeader(to *Mailbox, subject string, body *bytes.Buffer) {
+func (mailer *SMTPMailer) htmlEmailHeader(to *mail.Address, subject string, body *bytes.Buffer) {
 	emailLine("MIME-version: 1.0", body)
 	emailLine("Content-Type: text/html; charset=\"UTF-8\";", body)
 	mailer.plainEmailHeader(to, subject, body)
 }
 
-func (mailer *SMTPMailer) plainEmailHeader(to *Mailbox, subject string, body *bytes.Buffer) {
+func (mailer *SMTPMailer) plainEmailHeader(to *mail.Address, subject string, body *bytes.Buffer) {
 	emailLine(fmt.Sprintf("From: %s", mailer.from), body)
 	emailLine(fmt.Sprintf("To: %s", to), body)
 	emailLine(fmt.Sprintf("Subject: %s", subject), body)

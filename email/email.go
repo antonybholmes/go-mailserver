@@ -1,8 +1,10 @@
 package email
 
 import (
-	"github.com/antonybholmes/go-env"
+	"net/mail"
+
 	"github.com/antonybholmes/go-mailer"
+	"github.com/antonybholmes/go-sys/env"
 )
 
 var emailer = mailer.NewSMTPMailer()
@@ -11,7 +13,7 @@ func init() {
 	// force loading of enviromental variables if not done so
 	env.Load()
 
-	from := mailer.NewMailbox(env.GetStr("NAME", ""), env.GetStr("SMTP_FROM", ""))
+	from := &mail.Address{Name: env.GetStr("NAME", ""), Address: env.GetStr("SMTP_FROM", "")}
 
 	// Attempt to initialize by scanning enviromental variables.
 	// If user has set them, magic, otherwise user will have to manually
@@ -30,18 +32,18 @@ func SetHost(host string, port uint) *mailer.SMTPMailer {
 	return emailer.SetHost(host, port)
 }
 
-func From() *mailer.Mailbox {
+func From() *mail.Address {
 	return emailer.From()
 }
 
-func SetFrom(from *mailer.Mailbox) *mailer.SMTPMailer {
+func SetFrom(from *mail.Address) *mailer.SMTPMailer {
 	return emailer.SetFrom(from)
 }
 
-func SendEmail(to *mailer.Mailbox, subject string, message string) error {
+func SendEmail(to *mail.Address, subject string, message string) error {
 	return emailer.SendEmail(to, subject, message)
 }
 
-func SendHtmlEmail(to *mailer.Mailbox, subject string, message string) error {
+func SendHtmlEmail(to *mail.Address, subject string, message string) error {
 	return emailer.SendHtmlEmail(to, subject, message)
 }
