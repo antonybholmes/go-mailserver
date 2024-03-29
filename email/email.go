@@ -5,6 +5,7 @@ import (
 
 	"github.com/antonybholmes/go-mailer"
 	"github.com/antonybholmes/go-sys/env"
+	"github.com/rs/zerolog/log"
 )
 
 var emailer = mailer.NewSMTPMailer()
@@ -15,6 +16,7 @@ func init() {
 
 	from := &mail.Address{Name: env.GetStr("NAME", ""), Address: env.GetStr("SMTP_FROM", "")}
 
+	log.Debug().Msgf("port %d", env.GetUint32("SMTP_PORT", 587))
 	// Attempt to initialize by scanning enviromental variables.
 	// If user has set them, magic, otherwise user will have to manually
 	// specify
