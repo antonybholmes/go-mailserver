@@ -18,40 +18,40 @@ type SMTPMailer struct {
 	from     *mail.Address
 }
 
-func NewSMTPMailer() *SMTPMailer {
-	host := ""
-	port := uint(587)
+func NewSMTPMailer(user string, password string, host string, port uint, from *mail.Address) *SMTPMailer {
+	//host := ""
+	//port := uint(587)
 	addr := fmt.Sprintf("%s:%d", host, port)
 
 	return &SMTPMailer{
-		user:     "",
-		password: "",
+		user:     user,
+		password: password,
 		host:     host,
 		port:     port,
 		addr:     addr,
-		from:     nil}
+		from:     from}
 }
 
-func (mailer *SMTPMailer) SetUser(user string, password string) *SMTPMailer {
-	mailer.user = user
-	mailer.password = password
-	return mailer
-}
+// func (mailer *SMTPMailer) SetUser(user string, password string) *SMTPMailer {
+// 	mailer.user = user
+// 	mailer.password = password
+// 	return mailer
+// }
 
-func (mailer *SMTPMailer) SetHost(host string, port uint) *SMTPMailer {
-	mailer.host = host
-	mailer.port = port
-	mailer.addr = fmt.Sprintf("%s:%d", mailer.host, mailer.port)
-	return mailer
-}
+// func (mailer *SMTPMailer) SetHost(host string, port uint) *SMTPMailer {
+// 	mailer.host = host
+// 	mailer.port = port
+// 	mailer.addr = fmt.Sprintf("%s:%d", mailer.host, mailer.port)
+// 	return mailer
+// }
+
+// func (mailer *SMTPMailer) SetFrom(from *mail.Address) *SMTPMailer {
+// 	mailer.from = from
+// 	return mailer
+// }
 
 func (mailer *SMTPMailer) From() *mail.Address {
 	return mailer.from
-}
-
-func (mailer *SMTPMailer) SetFrom(from *mail.Address) *SMTPMailer {
-	mailer.from = from
-	return mailer
 }
 
 func (mailer *SMTPMailer) SendEmailRaw(to *mail.Address, body []byte) error {
