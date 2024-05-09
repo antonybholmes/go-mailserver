@@ -6,7 +6,7 @@ replace github.com/antonybholmes/go-sys => ../go-sys
 
 require (
 	github.com/antonybholmes/go-sys v0.0.0-00010101000000-000000000000
-	github.com/aws/aws-sdk-go v1.52.2
+	github.com/aws/aws-sdk-go v1.52.5
 	github.com/rs/zerolog v1.32.0
 )
 
