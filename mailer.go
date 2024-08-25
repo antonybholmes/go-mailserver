@@ -10,12 +10,12 @@ import (
 )
 
 type SMTPMailer struct {
+	from     *mail.Address
 	user     string
 	password string
 	host     string
-	port     uint
 	addr     string
-	from     *mail.Address
+	port     uint
 }
 
 func NewSMTPMailer(user string, password string, host string, port uint, from *mail.Address) *SMTPMailer {
