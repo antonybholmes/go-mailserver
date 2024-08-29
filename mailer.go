@@ -92,7 +92,7 @@ func (mailer *SMTPMailer) SendEmailRaw(to *mail.Address, body []byte) error {
 		return err
 	}
 
-	log.Debug().Msgf("Email Sent Successfully!")
+	log.Debug().Msgf("Email to %s Sent Successfully!", to.Address)
 
 	return nil
 }
