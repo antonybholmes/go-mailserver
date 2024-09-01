@@ -134,3 +134,11 @@ func (mailer *SMTPMailer) plainEmailHeader(to *mail.Address, subject string, bod
 func emailLine(s string, body *bytes.Buffer) {
 	body.Write([]byte(fmt.Sprintf("%s\r\n", s)))
 }
+
+type RedisQueueEmail struct {
+	To          string `json:"to"`
+	EmailType   string `json:"type"`
+	Token       string `json:"token"`
+	CallBackUrl string `json:"callbackurl"`
+	VisitUrl    string `json:"visiturl"`
+}
