@@ -10,7 +10,7 @@ import (
 
 var instance *mailer.SMTPMailer
 
-func Init() {
+func init() {
 	// force loading of enviromental variables if not done so
 	//env.Reload()
 
