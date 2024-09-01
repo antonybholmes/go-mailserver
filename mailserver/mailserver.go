@@ -1,4 +1,4 @@
-package mailer
+package mailserver
 
 import (
 	"net/mail"
@@ -10,9 +10,9 @@ import (
 
 var instance *mailer.SMTPMailer
 
-func init() {
+func Init() {
 	// force loading of enviromental variables if not done so
-	//env.Load()
+	//env.Reload()
 
 	from := &mail.Address{Name: env.GetStr("NAME", ""), Address: env.GetStr("SMTP_FROM", "")}
 
