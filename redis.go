@@ -1,6 +1,10 @@
 package mailer
 
 const (
+	REDIS_EMAIL_CHANNEL = "email-channel"
+)
+
+const (
 	REDIS_EMAIL_TYPE_PASSWORDLESS = "passwordless"
 )
 
