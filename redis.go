@@ -5,7 +5,13 @@ const (
 )
 
 const (
-	REDIS_EMAIL_TYPE_PASSWORDLESS = "passwordless"
+	REDIS_EMAIL_TYPE_VERIFY           = "verify"
+	REDIS_EMAIL_TYPE_VERIFIED         = "verified"
+	REDIS_EMAIL_TYPE_PASSWORDLESS     = "passwordless"
+	REDIS_EMAIL_TYPE_PASSWORD_RESET   = "password-reset"
+	REDIS_EMAIL_TYPE_PASSWORD_UPDATED = "password-updated"
+	REDIS_EMAIL_TYPE_EMAIL_RESET      = "email-reset"
+	REDIS_EMAIL_TYPE_EMAIL_UPDATED    = "email-updated"
 )
 
 type RedisQueueEmail struct {
