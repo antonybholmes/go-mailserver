@@ -12,6 +12,7 @@ const (
 	REDIS_EMAIL_TYPE_PASSWORD_UPDATED = "password-updated"
 	REDIS_EMAIL_TYPE_EMAIL_RESET      = "email-reset"
 	REDIS_EMAIL_TYPE_EMAIL_UPDATED    = "email-updated"
+	REDIS_EMAIL_TYPE_ACCOUNT_CREATED  = "account-created"
 	REDIS_EMAIL_TYPE_ACCOUNT_UPDATED  = "account-updated"
 )
 
