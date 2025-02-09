@@ -17,11 +17,11 @@ const (
 )
 
 type RedisQueueEmail struct {
-	Name        string `json:"name"`
-	To          string `json:"to"`
-	EmailType   string `json:"type"`
-	Ttl         string `json:"ttl"`
-	Token       string `json:"token"`
-	CallBackUrl string `json:"callbackurl"`
-	VisitUrl    string `json:"visiturl"`
+	Name      string `json:"name"`
+	To        string `json:"to"`
+	EmailType string `json:"type"`
+	Ttl       string `json:"ttl"`
+	Token     string `json:"token"`
+	//RedirectUrl string `json:"redirectUrl"`
+	LinkUrl string `json:"linkUrl"`
 }
