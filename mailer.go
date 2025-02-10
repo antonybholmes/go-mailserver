@@ -84,10 +84,14 @@ func (mailer *SMTPMailer) SendEmailRaw(to *mail.Address, body []byte) error {
 	// Authentication.
 	auth := smtp.PlainAuth("", mailer.user, mailer.password, mailer.host)
 
+	log.Debug().Msgf("llllllllllll %v", mailer.addr)
+
 	// Sending email.
 	err := smtp.SendMail(mailer.addr, auth, mailer.from.Address, []string{
 		to.Address,
 	}, body)
+
+	log.Debug().Msgf("aaaaa")
 
 	if err != nil {
 		log.Error().Msgf("%s", err)

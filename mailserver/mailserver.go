@@ -16,7 +16,7 @@ func init() {
 
 	from := &mail.Address{Name: env.GetStr("NAME", ""), Address: env.GetStr("SMTP_FROM", "")}
 
-	log.Debug().Msgf("port %d", env.GetUint32("SMTP_PORT", 587))
+	log.Debug().Msgf("port %s", env.GetStr("SMTP_HOST", ""))
 	// Attempt to initialize by scanning enviromental variables.
 	// If user has set them, magic, otherwise user will have to manually
 	// specify
