@@ -24,4 +24,8 @@ type RedisQueueEmail struct {
 	Token     string `json:"token"`
 	//RedirectUrl string `json:"redirectUrl"`
 	LinkUrl string `json:"linkUrl"`
+	// Used to indicate if emails should be for web users or
+	// geared towards API users who just want the tokens without
+	// any links
+	Mode string `json:"mode"`
 }

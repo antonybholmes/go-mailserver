@@ -6,7 +6,6 @@ replace github.com/antonybholmes/go-sys => ../go-sys
 
 require (
 	github.com/antonybholmes/go-sys v0.0.0-00010101000000-000000000000
-	github.com/aws/aws-sdk-go v1.55.6
 	github.com/aws/aws-sdk-go-v2/service/sesv2 v1.41.5
 	github.com/rs/zerolog v1.33.0
 )
@@ -29,7 +28,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.32 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.6.32 // indirect
 	github.com/aws/smithy-go v1.22.2 // indirect
-	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
