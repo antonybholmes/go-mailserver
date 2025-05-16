@@ -38,6 +38,6 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/redis/go-redis/v9 v9.8.0
-	github.com/segmentio/kafka-go v0.4.47
+	github.com/segmentio/kafka-go v0.4.48
 	golang.org/x/sys v0.33.0 // indirect
 )
