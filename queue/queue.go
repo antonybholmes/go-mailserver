@@ -4,12 +4,12 @@ import (
 	mailer "github.com/antonybholmes/go-mailer"
 )
 
-var publisher mailer.EmailPublisher
+var queue mailer.EmailQueue
 
-func Init(p mailer.EmailPublisher) {
-	publisher = p
+func Init(q mailer.EmailQueue) {
+	queue = q
 }
 
 func PublishEmail(email *mailer.QueueEmail) error {
-	return publisher.PublishEmail(email)
+	return queue.SendEmail(email)
 }
