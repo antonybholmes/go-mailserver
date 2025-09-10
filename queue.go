@@ -41,7 +41,7 @@ type QueueEmail struct {
 	Name      string `json:"name"`
 	To        string `json:"to"`
 	EmailType string `json:"type"`
-	Ttl       string `json:"ttl"`
+	TTL       string `json:"ttl"`
 	Token     string `json:"token"`
 	//RedirectUrl string `json:"redirectUrl"`
 	LinkUrl string `json:"linkUrl"`
