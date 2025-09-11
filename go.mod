@@ -1,4 +1,4 @@
-module github.com/antonybholmes/go-mailer
+module github.com/antonybholmes/go-mail-server
 
 go 1.25
 

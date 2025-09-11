@@ -1,14 +1,14 @@
-package mailserver
+package smtpmailserver
 
 import (
 	"net/mail"
 
-	"github.com/antonybholmes/go-mailer"
+	mailserver "github.com/antonybholmes/go-mail-server"
 	"github.com/antonybholmes/go-sys/env"
 	"github.com/rs/zerolog/log"
 )
 
-var instance *mailer.SMTPMailer
+var instance *mailserver.SMTPMailServer
 
 func Init() {
 	// force loading of enviromental variables if not done so
@@ -25,7 +25,7 @@ func Init() {
 	// 	SetHost(env.GetStr("SMTP_HOST", ""), env.GetUint32("SMTP_PORT", 587)).
 	// 	SetFrom(from)
 
-	instance = mailer.NewSMTPMailer(env.GetStr("SMTP_USER", ""),
+	instance = mailserver.NewSMTPMailServer(env.GetStr("SMTP_USER", ""),
 		env.GetStr("SMTP_PASSWORD", ""),
 		env.GetStr("SMTP_HOST", ""),
 		env.GetUint32("SMTP_PORT", 587),

@@ -1,4 +1,4 @@
-package mailer
+package mailserver
 
 const (
 	QUEUE_EMAIL_TYPE_VERIFY           = "verify"

@@ -1,4 +1,4 @@
-package mailer
+package mailserver
 
 import (
 	"bytes"
@@ -9,7 +9,7 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
-type SMTPMailer struct {
+type SMTPMailServer struct {
 	from     *mail.Address
 	user     string
 	password string
@@ -18,14 +18,14 @@ type SMTPMailer struct {
 	port     uint
 }
 
-func NewSMTPMailer(user string, password string, host string, port uint, from *mail.Address) *SMTPMailer {
+func NewSMTPMailServer(user string, password string, host string, port uint, from *mail.Address) *SMTPMailServer {
 	//host := ""
 	//port := uint(587)
 	addr := fmt.Sprintf("%s:%d", host, port)
 
 	log.Debug().Msgf("smtp: %s", addr)
 
-	return &SMTPMailer{
+	return &SMTPMailServer{
 		user:     user,
 		password: password,
 		host:     host,
@@ -52,11 +52,11 @@ func NewSMTPMailer(user string, password string, host string, port uint, from *m
 // 	return mailer
 // }
 
-func (mailer *SMTPMailer) From() *mail.Address {
+func (mailer *SMTPMailServer) From() *mail.Address {
 	return mailer.from
 }
 
-func (mailer *SMTPMailer) SendEmailRaw(to *mail.Address, body []byte) error {
+func (mailer *SMTPMailServer) SendEmailRaw(to *mail.Address, body []byte) error {
 
 	//from := os.Getenv("EMAIL")
 
@@ -101,7 +101,7 @@ func (mailer *SMTPMailer) SendEmailRaw(to *mail.Address, body []byte) error {
 	return nil
 }
 
-func (mailer *SMTPMailer) SendEmail(to *mail.Address, subject string, message string) error {
+func (mailer *SMTPMailServer) SendEmail(to *mail.Address, subject string, message string) error {
 	var body bytes.Buffer
 
 	mailer.plainEmailHeader(to, subject, &body)
@@ -110,7 +110,7 @@ func (mailer *SMTPMailer) SendEmail(to *mail.Address, subject string, message st
 	return mailer.SendEmailRaw(to, body.Bytes())
 }
 
-func (mailer *SMTPMailer) SendHtmlEmail(to *mail.Address, subject string, message string) error {
+func (mailer *SMTPMailServer) SendHtmlEmail(to *mail.Address, subject string, message string) error {
 	var body bytes.Buffer
 
 	mailer.htmlEmailHeader(to, subject, &body)
@@ -121,13 +121,13 @@ func (mailer *SMTPMailer) SendHtmlEmail(to *mail.Address, subject string, messag
 	return mailer.SendEmailRaw(to, body.Bytes())
 }
 
-func (mailer *SMTPMailer) htmlEmailHeader(to *mail.Address, subject string, body *bytes.Buffer) {
+func (mailer *SMTPMailServer) htmlEmailHeader(to *mail.Address, subject string, body *bytes.Buffer) {
 	emailLine("MIME-version: 1.0", body)
 	emailLine("Content-Type: text/html; charset=\"UTF-8\";", body)
 	mailer.plainEmailHeader(to, subject, body)
 }
 
-func (mailer *SMTPMailer) plainEmailHeader(to *mail.Address, subject string, body *bytes.Buffer) {
+func (mailer *SMTPMailServer) plainEmailHeader(to *mail.Address, subject string, body *bytes.Buffer) {
 	emailLine(fmt.Sprintf("From: %s", mailer.from), body)
 	emailLine(fmt.Sprintf("To: %s", to), body)
 	emailLine(fmt.Sprintf("Subject: %s", subject), body)

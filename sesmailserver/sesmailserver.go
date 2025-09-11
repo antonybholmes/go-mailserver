@@ -3,15 +3,15 @@ package sesmailserver
 import (
 	"net/mail"
 
-	"github.com/antonybholmes/go-mailer"
+	mailserver "github.com/antonybholmes/go-mail-server"
 )
 
-var instance *mailer.SesMailer
+var instance *mailserver.SesMailer
 
 func Init(from *mail.Address) {
 	//from := &mail.Address{Name: env.GetStr("NAME", ""), Address: env.GetStr("SMTP_FROM", "")}
 
-	instance = mailer.NewSesMailer(from)
+	instance = mailserver.NewSesMailer(from)
 }
 
 // func SetUser(user string, password string) *mailer.SMTPMailer {

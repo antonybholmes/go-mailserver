@@ -1,15 +1,15 @@
 package queue
 
 import (
-	mailer "github.com/antonybholmes/go-mailer"
+	mailserver "github.com/antonybholmes/go-mail-server"
 )
 
-var queue mailer.EmailQueue
+var queue mailserver.EmailQueue
 
-func Init(q mailer.EmailQueue) {
+func Init(q mailserver.EmailQueue) {
 	queue = q
 }
 
-func PublishEmail(email *mailer.QueueEmail) error {
+func PublishEmail(email *mailserver.QueueEmail) error {
 	return queue.SendEmail(email)
 }
