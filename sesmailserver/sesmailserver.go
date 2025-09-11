@@ -3,7 +3,7 @@ package sesmailserver
 import (
 	"net/mail"
 
-	mailserver "github.com/antonybholmes/go-mail-server"
+	mailserver "github.com/antonybholmes/go-mailserver"
 )
 
 var instance *mailserver.SesMailer

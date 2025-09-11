@@ -3,7 +3,7 @@ package smtpmailserver
 import (
 	"net/mail"
 
-	mailserver "github.com/antonybholmes/go-mail-server"
+	mailserver "github.com/antonybholmes/go-mailserver"
 	"github.com/antonybholmes/go-sys/env"
 	"github.com/rs/zerolog/log"
 )

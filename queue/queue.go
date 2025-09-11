@@ -1,7 +1,7 @@
 package queue
 
 import (
-	mailserver "github.com/antonybholmes/go-mail-server"
+	mailserver "github.com/antonybholmes/go-mailserver"
 )
 
 var queue mailserver.EmailQueue
