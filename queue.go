@@ -34,7 +34,7 @@ const (
 	QUEUE_EMAIL_TYPE_EMAIL_UPDATED    = "email-updated"
 	QUEUE_EMAIL_TYPE_ACCOUNT_CREATED  = "account-created"
 	QUEUE_EMAIL_TYPE_ACCOUNT_UPDATED  = "account-updated"
-	QUEUE_EMAIL_TYPE_TOTP             = "totp"
+	QUEUE_EMAIL_TYPE_OTP              = "otp"
 )
 
 type QueueEmail struct {
