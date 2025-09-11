@@ -14,11 +14,14 @@ import (
 type SesMailer struct {
 	svc  *sesv2.Client
 	from *string
+	ctx  context.Context
 }
 
 func NewSesMailer(from *mail.Address) *SesMailer {
 	// Create a new SES session
-	cfg, err := config.LoadDefaultConfig(context.TODO(), config.WithRegion("us-east-1"))
+	ctx := context.Background()
+
+	cfg, err := config.LoadDefaultConfig(ctx)
 	if err != nil {
 		log.Fatal().Msgf("unable to load SDK config, %v", err)
 	}
@@ -28,7 +31,9 @@ func NewSesMailer(from *mail.Address) *SesMailer {
 
 	return &SesMailer{
 		svc:  svc,
-		from: aws.String(from.String())}
+		from: aws.String(from.String()),
+		ctx:  ctx,
+	}
 }
 
 // func (mailer *SMTPMailer) SetUser(user string, password string) *SMTPMailer {
@@ -76,7 +81,7 @@ func (mailer *SesMailer) SendHtmlEmail(to *mail.Address, subject string, message
 	}
 
 	// Send the email
-	resp, err := mailer.svc.SendEmail(context.TODO(), input)
+	resp, err := mailer.svc.SendEmail(mailer.ctx, input)
 	if err != nil {
 		return err
 	}
