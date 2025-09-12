@@ -19,8 +19,8 @@ func NewRedisEmailQueue(rdb *redis.Client) *RedisEmailQueue {
 	return &RedisEmailQueue{rdb: rdb}
 }
 
-func (publisher *RedisEmailQueue) SendEmail(email *QueueEmail) error {
-	payload, err := json.Marshal(email)
+func (publisher *RedisEmailQueue) SendMail(mail *MailItem) error {
+	payload, err := json.Marshal(mail)
 
 	if err != nil {
 		return err

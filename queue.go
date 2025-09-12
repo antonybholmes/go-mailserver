@@ -13,7 +13,7 @@ const (
 	QUEUE_EMAIL_TYPE_OTP              = "otp"
 )
 
-type QueueEmail struct {
+type MailItem struct {
 	Name      string `json:"name"`
 	To        string `json:"to"`
 	EmailType string `json:"type"`
@@ -27,6 +27,6 @@ type QueueEmail struct {
 	Mode string `json:"mode"`
 }
 
-type EmailQueue interface {
-	SendEmail(email *QueueEmail) error
+type MailQueue interface {
+	SendMail(mail *MailItem) error
 }

@@ -30,6 +30,6 @@ func Init(from *mail.Address) {
 // 	return instance.SendEmail(to, subject, message)
 // }
 
-func SendHtmlEmail(to *mail.Address, subject string, message string) error {
-	return instance.SendHtmlEmail(to, subject, "", message)
+func SendHtmlMail(to *mail.Address, subject string, message string) error {
+	return instance.SendHtmlMail(to, subject, "", message)
 }

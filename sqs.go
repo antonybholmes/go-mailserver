@@ -38,9 +38,9 @@ func NewSQSEmailQueue(queueUrl string) *SQSEmailQueue {
 	return &SQSEmailQueue{client: client, queueUrl: aws.String(queueUrl), ctx: ctx}
 }
 
-func (queue *SQSEmailQueue) SendEmail(email *QueueEmail) error {
+func (queue *SQSEmailQueue) SendMail(mail *MailItem) error {
 
-	body, err := json.Marshal(email)
+	body, err := json.Marshal(mail)
 
 	if err != nil {
 		return err

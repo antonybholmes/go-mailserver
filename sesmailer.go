@@ -54,7 +54,7 @@ func NewSesMailer(from *mail.Address) *SesMailer {
 // 	return mailer
 // }
 
-func (mailer *SesMailer) SendHtmlEmail(to *mail.Address, subject string, message string, html string) error {
+func (mailer *SesMailer) SendHtmlMail(to *mail.Address, subject string, message string, html string) error {
 	input := &sesv2.SendEmailInput{
 		Content: &types.EmailContent{
 			Simple: &types.Message{
