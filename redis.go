@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	QUEUE_EMAIL_CHANNEL = "email-channel"
+	EmailQueueChannel = "email-channel"
 )
 
 type RedisEmailQueue struct {
@@ -26,7 +26,7 @@ func (publisher *RedisEmailQueue) SendMail(mail *MailItem) error {
 		return err
 	}
 
-	return publisher.publish(QUEUE_EMAIL_CHANNEL, payload)
+	return publisher.publish(EmailQueueChannel, payload)
 }
 
 func (publisher *RedisEmailQueue) publish(channel string, data []byte) error {
