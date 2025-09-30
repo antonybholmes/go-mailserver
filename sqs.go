@@ -12,10 +12,10 @@ import (
 )
 
 var (
-	AWSStringType = aws.String("String")
-	AWSNumberType = aws.String("Number")
-	AWSBinaryType = aws.String("Binary")
-	AWSEmailValue = aws.String("email")
+	AwsTypeString = aws.String("String")
+	AwsTypeNumber = aws.String("Number")
+	AwsTypeBinary = aws.String("Binary")
+	AwsEmailValue = aws.String("email")
 )
 
 type SQSEmailQueue struct {
@@ -24,7 +24,7 @@ type SQSEmailQueue struct {
 	ctx      context.Context
 }
 
-func NewSQSEmailQueue(queueUrl string) *SQSEmailQueue {
+func NewSqsEmailQueue(queueUrl string) *SQSEmailQueue {
 	ctx := context.Background()
 
 	// Load AWS config (region and credentials)
@@ -53,8 +53,8 @@ func (queue *SQSEmailQueue) SendMail(mail *MailItem) error {
 		// Optional: add message attributes
 		MessageAttributes: map[string]types.MessageAttributeValue{
 			"type": {
-				DataType:    AWSStringType,
-				StringValue: AWSEmailValue,
+				DataType:    AwsTypeString,
+				StringValue: AwsEmailValue,
 			},
 		},
 	})

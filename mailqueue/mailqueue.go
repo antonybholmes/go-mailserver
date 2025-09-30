@@ -1,13 +1,20 @@
 package mailqueue
 
 import (
+	"sync"
+
 	mailserver "github.com/antonybholmes/go-mailserver"
 )
 
-var queue mailserver.MailQueue
+var (
+	queue mailserver.MailQueue
+	once  sync.Once
+)
 
-func Init(q mailserver.MailQueue) {
-	queue = q
+func InitMailQueue(q mailserver.MailQueue) {
+	once.Do(func() {
+		queue = q
+	})
 }
 
 // SendMail adds an email to the mail queue

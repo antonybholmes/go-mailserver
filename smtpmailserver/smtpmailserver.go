@@ -2,34 +2,41 @@ package smtpmailserver
 
 import (
 	"net/mail"
+	"sync"
 
 	mailserver "github.com/antonybholmes/go-mailserver"
 	"github.com/antonybholmes/go-sys/env"
 	"github.com/rs/zerolog/log"
 )
 
-var instance *mailserver.SMTPMailServer
+var (
+	instance *mailserver.SMTPMailServer
+	once     sync.Once
+)
 
-func Init() {
+func InitSMTPMailer() {
 	// force loading of enviromental variables if not done so
 	//env.Reload()
 
-	from := &mail.Address{Name: env.GetStr("NAME", ""), Address: env.GetStr("SMTP_FROM", "")}
+	once.Do(func() {
 
-	log.Debug().Msgf("port %s", env.GetStr("SMTP_HOST", ""))
-	// Attempt to initialize by scanning enviromental variables.
-	// If user has set them, magic, otherwise user will have to manually
-	// specify
-	// instance.
-	// 	SetUser(env.GetStr("SMTP_USER", ""), env.GetStr("SMTP_PASSWORD", "")).
-	// 	SetHost(env.GetStr("SMTP_HOST", ""), env.GetUint32("SMTP_PORT", 587)).
-	// 	SetFrom(from)
+		from := &mail.Address{Name: env.GetStr("NAME", ""), Address: env.GetStr("SMTP_FROM", "")}
 
-	instance = mailserver.NewSMTPMailServer(env.GetStr("SMTP_USER", ""),
-		env.GetStr("SMTP_PASSWORD", ""),
-		env.GetStr("SMTP_HOST", ""),
-		env.GetUint32("SMTP_PORT", 587),
-		from)
+		log.Debug().Msgf("port %s", env.GetStr("SMTP_HOST", ""))
+		// Attempt to initialize by scanning enviromental variables.
+		// If user has set them, magic, otherwise user will have to manually
+		// specify
+		// instance.
+		// 	SetUser(env.GetStr("SMTP_USER", ""), env.GetStr("SMTP_PASSWORD", "")).
+		// 	SetHost(env.GetStr("SMTP_HOST", ""), env.GetUint32("SMTP_PORT", 587)).
+		// 	SetFrom(from)
+
+		instance = mailserver.NewSMTPMailServer(env.GetStr("SMTP_USER", ""),
+			env.GetStr("SMTP_PASSWORD", ""),
+			env.GetStr("SMTP_HOST", ""),
+			env.GetUint32("SMTP_PORT", 587),
+			from)
+	})
 }
 
 // func SetUser(user string, password string) *mailer.SMTPMailer {
