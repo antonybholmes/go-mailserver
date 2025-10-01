@@ -87,7 +87,7 @@ func (mailer *SesMailer) SendHtmlMail(to *mail.Address, subject string, message 
 	}
 
 	// Print the message ID on success
-	log.Debug().Msgf("Email sent! Message ID: %s", *resp.MessageId)
+	log.Debug().Msgf("email sent: %s", *resp.MessageId)
 
 	return nil
 }
