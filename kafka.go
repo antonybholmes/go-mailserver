@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/rs/zerolog/log"
+	"github.com/antonybholmes/go-sys/log"
 	"github.com/segmentio/kafka-go"
 )
 

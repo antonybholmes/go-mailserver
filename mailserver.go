@@ -6,7 +6,7 @@ import (
 	"net/mail"
 	"net/smtp"
 
-	"github.com/rs/zerolog/log"
+	"github.com/antonybholmes/go-sys/log"
 )
 
 type SMTPMailServer struct {

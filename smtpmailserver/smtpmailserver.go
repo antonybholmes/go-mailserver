@@ -6,7 +6,7 @@ import (
 
 	mailserver "github.com/antonybholmes/go-mailserver"
 	"github.com/antonybholmes/go-sys/env"
-	"github.com/rs/zerolog/log"
+	"github.com/antonybholmes/go-sys/log"
 )
 
 var (

@@ -4,11 +4,11 @@ import (
 	"context"
 	"net/mail"
 
+	"github.com/antonybholmes/go-sys/log"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
-	"github.com/rs/zerolog/log"
 )
 
 type SesMailer struct {
