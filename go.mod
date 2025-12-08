@@ -6,7 +6,7 @@ replace github.com/antonybholmes/go-sys => ../go-sys
 
 require (
 	github.com/antonybholmes/go-sys v0.0.0-20251201172055-50c02bde14ef
-	github.com/aws/aws-sdk-go-v2/service/sesv2 v1.55.2
+	github.com/aws/aws-sdk-go-v2/service/sesv2 v1.56.0
 )
 
 require (
@@ -40,5 +40,5 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/redis/go-redis/v9 v9.17.2
 	github.com/segmentio/kafka-go v0.4.49
-	golang.org/x/sys v0.38.0 // indirect
+	golang.org/x/sys v0.39.0 // indirect
 )
