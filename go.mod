@@ -5,7 +5,7 @@ go 1.25
 replace github.com/antonybholmes/go-sys => ../go-sys
 
 require (
-	github.com/antonybholmes/go-sys v0.0.0-20251215211105-61a3d71011f7
+	github.com/antonybholmes/go-sys v0.0.0-20251221180058-882857878f72
 	github.com/aws/aws-sdk-go-v2/service/sesv2 v1.59.0
 )
 
