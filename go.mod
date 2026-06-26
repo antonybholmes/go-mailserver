@@ -5,7 +5,7 @@ go 1.26
 replace github.com/antonybholmes/go-sys => ../go-sys
 
 require (
-	github.com/antonybholmes/go-sys v0.0.0-20260609172735-8ea2a7623e43
+	github.com/antonybholmes/go-sys v0.0.0-20260616152946-01b9b0d3a79b
 	github.com/aws/aws-sdk-go-v2/service/sesv2 v1.62.4
 )
 
@@ -37,7 +37,7 @@ require (
 	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/mattn/go-colorable v0.1.15 // indirect
 	github.com/mattn/go-isatty v0.0.22 // indirect
-	github.com/redis/go-redis/v9 v9.20.1
+	github.com/redis/go-redis/v9 v9.21.0
 	github.com/segmentio/kafka-go v0.4.51
 	golang.org/x/sys v0.46.0 // indirect
 )
